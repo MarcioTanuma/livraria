@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController
 class BookController(private val repository: BookRegistronRepository) {
 
     @PostMapping
-    fun create(@RequestBody account: BookRegistron) = repository.save(account)
+    fun create(@RequestBody account: BookRegistron) = repository.save(account) // irá salvar o livro no banco de dados
 
     @GetMapping
-    fun getAll(): List<BookRegistron> = repository.findAll()
+    fun getAll(): List<BookRegistron> = repository.findAll() //comunicação com o banco de dados e exibe todos os livros
 
+    @GetMapping("/{id}")
     fun getbyId(@PathVariable id: Long) : ResponseEntity<BookRegistron> =
         repository.findById(id).map {
         ResponseEntity.ok(it)
