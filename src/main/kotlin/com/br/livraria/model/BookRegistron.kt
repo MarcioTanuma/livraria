@@ -1,4 +1,4 @@
-package com.br.livraria
+package com.br.livraria.model
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

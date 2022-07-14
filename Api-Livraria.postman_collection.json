@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "8d03d6dc-081d-47f3-8913-0e9314be79df",
+		"name": "Api-Livraria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16853812"
+	},
+	"item": [
+		{
+			"name": "Salvar Livros",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Códigos Limpos\",\r\n    \"autor\": \"Cleber Graciano\",\r\n    \"editora\": \"Nova Tech\",\r\n    \"ano\": 2020,\r\n    \"preco\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar-Livro-Por-ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/books/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar-Todos-Livros",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar-Dados-Livros",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar-Livro",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

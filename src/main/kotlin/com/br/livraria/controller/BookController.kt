@@ -1,7 +1,7 @@
-package com.br.livraria
+package com.br.livraria.controller
 
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
+import com.br.livraria.model.BookRegistron
+import com.br.livraria.service.BookService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,37 +14,21 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/books")
 
-class BookController(private val repository: BookRegistronRepository) {
+class BookController(private val service: BookService) {
 
     @PostMapping
-    fun create(@RequestBody account: BookRegistron) = repository.save(account) // irá salvar o livro no banco de dados
+    fun create(@RequestBody account: BookRegistron) = service.create(account) // irá salvar o livro no banco de dados
 
     @GetMapping
-    fun getAll(): List<BookRegistron> = repository.findAll() //comunicação com o banco de dados e exibe todos os livros
+    fun getAll(): List<BookRegistron> = service.getAll() //comunicação com o banco de dados e exibe todos os livros
 
     @GetMapping("/{id}")
-    fun getbyId(@PathVariable id: Long) : ResponseEntity<BookRegistron> =
-        repository.findById(id).map {
-        ResponseEntity.ok(it)
-        }.orElse(ResponseEntity.notFound().build())
+    fun getbyId(@PathVariable id: Long) = service.getbyId(id)
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long, @RequestBody account: BookRegistron) : ResponseEntity<BookRegistron> =
-        repository.findById(id).map {
-            val accountToUpdate = it.copy(
-                titulo = account.titulo,
-                autor = account.autor,
-                editora = account.editora,
-                ano = account.ano,
-                preco = account.preco,
-            )
-            ResponseEntity.ok(repository.save(accountToUpdate))
-        }.orElse(ResponseEntity.notFound().build())
+    fun update(@PathVariable id: Long, @RequestBody account: BookRegistron) = service.update(id,account)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long) : ResponseEntity<Void> =
-        repository.findById(id).map {
-        repository.delete(it)
-            ResponseEntity<Void>(HttpStatus.OK)
-        }.orElse(ResponseEntity.notFound().build())
+    fun delete(@PathVariable id: Long) = service.delete(id)
+
 }
